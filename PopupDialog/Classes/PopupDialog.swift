@@ -119,6 +119,52 @@ final public class PopupDialog: UIViewController {
                   completion: completion)
     }
 
+    
+    /*!
+     Creates a standard popup dialog with title, message and image field
+     
+     - parameter title:            The dialog title
+     - parameter message:          The dialog message
+     - parameter image:            The dialog image
+     - parameter buttonAlignment:  The dialog button alignment
+     - parameter transitionStyle:  The dialog transition style
+     - parameter preferredWidth:   The preferred width for iPad screens
+     - parameter tapGestureDismissal: Indicates if dialog can be dismissed via tap gesture
+     - parameter panGestureDismissal: Indicates if dialog can be dismissed via pan gesture
+     - parameter hideStatusBar:    Whether to hide the status bar on PopupDialog presentation
+     - parameter completion:       Completion block invoked when dialog was dismissed
+     
+     - returns: Popup dialog default style
+     */
+    @objc public convenience init(
+        title: String?,
+        attributedMessage: NSAttributedString?,
+        image: UIImage? = nil,
+        buttonAlignment: UILayoutConstraintAxis = .vertical,
+        transitionStyle: PopupDialogTransitionStyle = .bounceUp,
+        preferredWidth: CGFloat = 340,
+        tapGestureDismissal: Bool = true,
+        panGestureDismissal: Bool = true,
+        hideStatusBar: Bool = false,
+        completion: (() -> Void)? = nil) {
+        
+        // Create and configure the standard popup dialog view
+        let viewController = PopupDialogDefaultViewController()
+        viewController.titleText   = title
+        viewController.messageAttributedText = attributedMessage
+        viewController.image       = image
+        
+        // Call designated initializer
+        self.init(viewController: viewController,
+                  buttonAlignment: buttonAlignment,
+                  transitionStyle: transitionStyle,
+                  preferredWidth: preferredWidth,
+                  tapGestureDismissal: tapGestureDismissal,
+                  panGestureDismissal: panGestureDismissal,
+                  hideStatusBar: hideStatusBar,
+                  completion: completion)
+    }
+    
     /*!
      Creates a popup dialog containing a custom view
 
